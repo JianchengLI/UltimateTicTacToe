@@ -12,7 +12,8 @@ public class TestCase {
 		Case caseEmpty = new Case();
 		assert caseEmpty.isEmpty();
 		
-		Case caseNotEmpty = new Case(Placement.CROSS);
+		Case caseNotEmpty = new Case(caseEmpty);
+		caseNotEmpty.setPlacement(Placement.CIRCLE);
 		assert !caseNotEmpty.isEmpty();
 	}
 }
