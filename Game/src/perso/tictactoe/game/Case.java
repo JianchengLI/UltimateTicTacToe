@@ -32,7 +32,7 @@ public class Case {
 		}
 	}
 	
-	public void setCasePlacement(Position position, Placement placement){
+	public void setPlacement(Position position, Placement placement){
 		setPlacement(placement);
 	};
 	/** 

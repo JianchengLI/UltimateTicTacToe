@@ -1,32 +1,34 @@
 package perso.tictactoe.game;
 
-
-public class TicTacToeCase extends Case{
+public class TableCase extends Case{
 	
-	protected Case[] _cases =  new Case[9];
-
-	public TicTacToeCase(){
+	private Case[] _cases =  new Case[9];
+	private FICaseGenerator _generator;
+	
+	public TableCase(FICaseGenerator generator){
 		super();
-		_initCases();
+		_generator = generator;
+		initTable();
 	};
 	
-	public TicTacToeCase(Case parent) {
+	public TableCase(Case parent, FICaseGenerator generator) {
 		super(parent);
-		_initCases();
+		_generator = generator;
+		initTable();
 	}
 
-	protected void _initCases() {
+	protected void initTable() {
 		for (int i = 0; i < _cases.length; i++) {
-			_cases[i] = new Case(this);
+			_cases[i] = _generator.create(this);
 		}
 	}
 	
 	public Case[] getCases(){
 		return _cases;
 	}
-	
+
 	@Override
-	public void setCasePlacement(Position position, Placement placement){
+	public void setPlacement(Position position, Placement placement){
 		_cases[position.getValue()].setPlacement(placement);
 	}
 	
