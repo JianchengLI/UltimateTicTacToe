@@ -6,6 +6,6 @@ package perso.tictactoe.game;
  *
  */
 @FunctionalInterface
-public interface FICaseGenerator{
-	public Case create(Case parent);
+public interface ICaseFactoryMethod{
+	public Case createCase(Case parent);
 }
