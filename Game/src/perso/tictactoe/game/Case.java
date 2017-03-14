@@ -1,7 +1,13 @@
 package perso.tictactoe.game;
 
 import java.util.Optional;
-
+/**
+ * Maybe has a parent Case. 
+ * Can "setPlacement" and check "isPlacement?" of all its parent(s) state
+ * Parent "isPlacement?" then "setPlacement" by child's state
+ * @author Jiancheng
+ *
+ */
 public class Case {
 	protected Placement _placement;
 	protected Optional<Case> _parent = Optional.empty();

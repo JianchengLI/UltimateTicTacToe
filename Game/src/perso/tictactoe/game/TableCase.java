@@ -1,5 +1,12 @@
 package perso.tictactoe.game;
 
+/**
+ * Case 9x9
+ * Can "setPlacement" direct OR
+ * Can "setPlacement" by position ( set child's placement )
+ * @author Jiancheng
+ *
+ */
 public class TableCase extends Case{
 	
 	private Case[] _cases =  new Case[9];
