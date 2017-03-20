@@ -1,5 +1,4 @@
 package perso.tictactoe.game;
-
 import java.util.Optional;
 /**
  * Maybe has a parent Case. 
@@ -11,6 +10,7 @@ import java.util.Optional;
 public class Case {
 	protected Placement _placement;
 	protected Optional<Case> _parent = Optional.empty();
+	
 	
 	public Case() {
 		_placement = Placement.EMPTY;
@@ -53,4 +53,8 @@ public class Case {
 		return _placement == Placement.EMPTY;
 	}
 
+	public void display(){
+		if (_placement == Placement.EMPTY) 
+			System.out.println("N");
+	}
 }

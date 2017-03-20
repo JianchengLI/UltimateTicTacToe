@@ -10,23 +10,23 @@ package perso.tictactoe.game;
 public class TableCase extends Case{
 	
 	private Case[] _cases =  new Case[9];
-	private ICaseFactoryMethod _factory_method;
+	private ICaseFactoryMethod _factoryMethod;
 	
 	public TableCase(ICaseFactoryMethod factoryMethod){
 		super();
-		_factory_method = factoryMethod;
+		_factoryMethod = factoryMethod;
 		initTable();
 	};
 	
 	public TableCase(Case parent, ICaseFactoryMethod factoryMethod) {
 		super(parent);
-		_factory_method = factoryMethod;
+		_factoryMethod = factoryMethod;
 		initTable();
 	}
 
 	protected void initTable() {
 		for (int i = 0; i < _cases.length; i++) {
-			_cases[i] = _factory_method.createCase(this);
+			_cases[i] = _factoryMethod.createCase(this);
 		}
 	}
 	
