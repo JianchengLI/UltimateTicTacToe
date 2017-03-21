@@ -4,9 +4,13 @@ public class Game {
 	
 	private TableCase _checkerboard;
 	private Case[][] _tableboard = new Case[9][9]; // another container to fetch checkerboard easily
+	private Player[] _players = new Player[2];
+	private Player _current;
+	private int _moves = 0;
 
-	public Game() {
+	public Game(Player player1, Player player2) {
 		this._checkerboard = new TableCase((parent)-> new TableCase(parent, (e)-> new Case(e)));
+		
 		Case[] tableCases = _checkerboard.getChildren().get();
 		for (int i = 0; i < tableCases.length; i++) {
 			Case[] cases = tableCases[i].getChildren().get();
@@ -14,13 +18,28 @@ public class Game {
 				_tableboard[j/3+(i/3)*3][j%3+(i%3)*3] = cases[j];
 			}
 		}
+		_players[0] = player1;
+		_players[1] = player2;
+		_current = player1;
 	}
 	
+	public Player[] getPlayers() {
+		return _players;
+	}
+
+	public int getMoves() {
+		return _moves;
+	}
+	
+	public Player getCurrentPlayer() {
+		return _current;
+	}
 	/**
 	 * After play success, switch to another player
 	 */
 	private void switchPlayer() {
-		//TODO: 
+		_moves++;
+		_current = _players[_moves%2];
 	}
 	
 	/**
@@ -32,8 +51,8 @@ public class Game {
 	public boolean play(Position pos_t, Position pos_c){
 		if (_checkerboard.getChildren().get()[pos_t.getValue()].getChildren().get()[pos_c.getValue()].getPlacement() == Placement.EMPTY)
 			return false;
-	
-		// Play here
+		
+		
 		switchPlayer();
 		return true;
 	}
