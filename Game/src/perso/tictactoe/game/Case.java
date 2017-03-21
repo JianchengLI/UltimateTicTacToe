@@ -11,6 +11,7 @@ import java.util.Optional;
 public class Case {
 	protected Placement _placement;
 	protected Optional<Case> _parent = Optional.empty();
+	private boolean enable = true;
 	
 	/**
 	 * Case maybe has children
@@ -30,9 +31,13 @@ public class Case {
 
 	}
 	
-	public Placement getPlacement() {
-		return _placement;
-	}
+	/*
+	 * Setters and Getters
+	 */
+	public boolean isEnable() { return enable; }
+	public void enable() { this.enable = true; }
+	public void disable() { this.enable = false; }
+	public Placement getPlacement() { return _placement; }
 
 	/**
 	 * Set Placement for this case

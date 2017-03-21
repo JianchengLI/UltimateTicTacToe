@@ -13,6 +13,7 @@ public class TableCase extends Case{
 	
 	private Case[] _cases =  new Case[9];
 	private ICaseFactoryMethod _factoryMethod;
+
 	
 	public TableCase(ICaseFactoryMethod factoryMethod){
 		super();
@@ -25,7 +26,7 @@ public class TableCase extends Case{
 		_factoryMethod = factoryMethod;
 		initTable();
 	}
-
+	
 	protected void initTable() {
 		for (int i = 0; i < _cases.length; i++) {
 			_cases[i] = _factoryMethod.createCase(this);

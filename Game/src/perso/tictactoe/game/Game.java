@@ -7,6 +7,7 @@ public class Game {
 	private Player[] _players = new Player[2];
 	private Player _current;
 	private int _moves = 0;
+	private boolean _console_active = true;
 
 	public Game(Player player1, Player player2) {
 		this._checkerboard = new TableCase((parent)-> new TableCase(parent, (e)-> new Case(e)));
@@ -23,22 +24,21 @@ public class Game {
 		_current = player1;
 	}
 	
-	public Player[] getPlayers() {
-		return _players;
-	}
-
-	public int getMoves() {
-		return _moves;
-	}
+	/*
+	 * Setters and Getters
+	 */
+	public void enableConsole(){_console_active = true; };
+	public void disableConsole(){_console_active = false; };
+	public Player[] getPlayers() {return _players;}
+	public int getMoves() {return _moves;}
+	public Player getCurrentPlayer() {return _current;}
 	
-	public Player getCurrentPlayer() {
-		return _current;
-	}
+	
 	/**
 	 * After play success, switch to another player
 	 */
 	private void switchPlayer() {
-		_moves++;
+		_moves ++;
 		_current = _players[_moves%2];
 	}
 	
@@ -49,11 +49,15 @@ public class Game {
 	 * @return boolean
 	 */
 	public boolean play(Position pos_t, Position pos_c){
-		if (_checkerboard.getChildren().get()[pos_t.getValue()].getChildren().get()[pos_c.getValue()].getPlacement() == Placement.EMPTY)
+		boolean isPlacement = _checkerboard.getChildren().get()[pos_t.getValue()].getChildren().get()[pos_c.getValue()].isPlacement();
+		boolean isEnable = _checkerboard.getChildren().get()[pos_t.getValue()].getChildren().get()[pos_c.getValue()].isEnable();
+		if (isPlacement || !isEnable)
 			return false;
 		
-		
+		_checkerboard.getChildren().get()[pos_t.getValue()].getChildren().get()[pos_c.getValue()].setPlacement(_current.getPlacement());
+		// TODO : Test play in !enable case
 		switchPlayer();
+		display();
 		return true;
 	}
 	
@@ -64,24 +68,31 @@ public class Game {
 	 * @return boolean
 	 */
 	public boolean play(int index_x, int index_y){
+		if (_tableboard[index_x][index_y].isPlacement() || !_tableboard[index_x][index_y].isEnable())
+			return false;
+		// TODO : Test play in !enable case
+		_tableboard[index_x][index_y].setPlacement(_current.getPlacement());
+		
 		switchPlayer();
-		return false;
+		display();
+		return true;
 	}
 	
 	/**
 	 * Console display methods
 	 */
 	public void display(){
-		for (int i = 0; i < 9; i++) {
-			if(i%3 == 0 && i > 0)
-				System.out.println("-----------");
-			for (int j = 0; j < 9; j++) {
-				if(j%3 == 0 && j > 0)
-					System.out.print("|");
-				_tableboard[i][j].display();
+		if (_console_active) {
+			for (int i = 0; i < 9; i++) {
+				if(i%3 == 0 && i > 0)
+					System.out.println("-----------");
+				for (int j = 0; j < 9; j++) {
+					if(j%3 == 0 && j > 0)
+						System.out.print("|");
+					_tableboard[i][j].display();
+				}
+				System.out.println("");
 			}
-			System.out.println("");
 		}
 	};	
-	
 }
