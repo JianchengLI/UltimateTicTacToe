@@ -13,7 +13,7 @@ public class TestTableCase {
 	@Test
 	public void testInit() {
 		TableCase tictactoe = new TableCase((parent) -> new Case(parent));
-		Case[] cases = tictactoe.getCases();
+		Case[] cases = tictactoe.getChildren().get();
 		for (Case e : cases) {
 		   assert e.getPlacement() == Placement.EMPTY;
 		}
@@ -108,20 +108,20 @@ public class TestTableCase {
 				(parent)-> new TableCase(parent, (e)-> new Case(e)));
 		
 		assert checkboard.getPlacement() == Placement.EMPTY;
-		checkboard.getCases()[Position.LEFT.getValue()].setPlacement(Position.LEFT, Placement.CIRCLE);
-		checkboard.getCases()[Position.LEFT.getValue()].setPlacement(Position.MID, Placement.CIRCLE);
-		checkboard.getCases()[Position.LEFT.getValue()].setPlacement(Position.RIGHT, Placement.CIRCLE);
-		assert checkboard.getCases()[Position.LEFT.getValue()].getPlacement() == Placement.CIRCLE;
+		checkboard.getChildren().get()[Position.LEFT.getValue()].setPlacement(Position.LEFT, Placement.CIRCLE);
+		checkboard.getChildren().get()[Position.LEFT.getValue()].setPlacement(Position.MID, Placement.CIRCLE);
+		checkboard.getChildren().get()[Position.LEFT.getValue()].setPlacement(Position.RIGHT, Placement.CIRCLE);
+		assert checkboard.getChildren().get()[Position.LEFT.getValue()].getPlacement() == Placement.CIRCLE;
 	
-		checkboard.getCases()[Position.RIGHT.getValue()].setPlacement(Position.LEFT, Placement.CIRCLE);
-		checkboard.getCases()[Position.RIGHT.getValue()].setPlacement(Position.MID, Placement.CIRCLE);
-		checkboard.getCases()[Position.RIGHT.getValue()].setPlacement(Position.RIGHT, Placement.CIRCLE);
-		assert checkboard.getCases()[Position.RIGHT.getValue()].getPlacement() == Placement.CIRCLE;
+		checkboard.getChildren().get()[Position.RIGHT.getValue()].setPlacement(Position.LEFT, Placement.CIRCLE);
+		checkboard.getChildren().get()[Position.RIGHT.getValue()].setPlacement(Position.MID, Placement.CIRCLE);
+		checkboard.getChildren().get()[Position.RIGHT.getValue()].setPlacement(Position.RIGHT, Placement.CIRCLE);
+		assert checkboard.getChildren().get()[Position.RIGHT.getValue()].getPlacement() == Placement.CIRCLE;
 	
-		checkboard.getCases()[Position.MID.getValue()].setPlacement(Position.LEFT, Placement.CIRCLE);
-		checkboard.getCases()[Position.MID.getValue()].setPlacement(Position.MID, Placement.CIRCLE);
-		checkboard.getCases()[Position.MID.getValue()].setPlacement(Position.RIGHT, Placement.CIRCLE);
-		assert checkboard.getCases()[Position.MID.getValue()].getPlacement() == Placement.CIRCLE;
+		checkboard.getChildren().get()[Position.MID.getValue()].setPlacement(Position.LEFT, Placement.CIRCLE);
+		checkboard.getChildren().get()[Position.MID.getValue()].setPlacement(Position.MID, Placement.CIRCLE);
+		checkboard.getChildren().get()[Position.MID.getValue()].setPlacement(Position.RIGHT, Placement.CIRCLE);
+		assert checkboard.getChildren().get()[Position.MID.getValue()].getPlacement() == Placement.CIRCLE;
 	
 		assert checkboard.getPlacement() == Placement.CIRCLE;
 	}

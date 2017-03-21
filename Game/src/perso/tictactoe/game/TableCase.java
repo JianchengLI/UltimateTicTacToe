@@ -1,5 +1,7 @@
 package perso.tictactoe.game;
 
+import java.util.Optional;
+
 /**
  * Case 9x9
  * Can "setPlacement" direct OR
@@ -30,8 +32,9 @@ public class TableCase extends Case{
 		}
 	}
 	
-	public Case[] getCases(){
-		return _cases;
+	@Override
+	public Optional<Case[]> getChildren(){
+		return Optional.of(_cases);
 	}
 
 	@Override

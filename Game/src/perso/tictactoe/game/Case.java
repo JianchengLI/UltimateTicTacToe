@@ -1,4 +1,5 @@
 package perso.tictactoe.game;
+
 import java.util.Optional;
 /**
  * Maybe has a parent Case. 
@@ -11,7 +12,14 @@ public class Case {
 	protected Placement _placement;
 	protected Optional<Case> _parent = Optional.empty();
 	
-	
+	/**
+	 * Case maybe has children
+	 * @return
+	 */
+	protected Optional<Case[]> getChildren(){
+		return Optional.empty();
+	};
+
 	public Case() {
 		_placement = Placement.EMPTY;
 	}
@@ -54,7 +62,16 @@ public class Case {
 	}
 
 	public void display(){
-		if (_placement == Placement.EMPTY) 
-			System.out.println("N");
+		switch (_placement) {
+		case CROSS:
+			System.out.print("X");
+			break;
+		case CIRCLE:
+			System.out.print("O");
+			break;
+		default:
+			System.out.print("E");
+			break;
+		}
 	}
 }
