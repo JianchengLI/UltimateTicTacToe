@@ -10,7 +10,7 @@ public enum Position {
 	BOT_LEFT(6), BOT(7), BOT_RIGHT(8); 
 	
 	private final int value;
-    private Position(int value) {
+    Position(int value) {
         this.value = value;
     }
 

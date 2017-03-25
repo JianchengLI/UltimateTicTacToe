@@ -1,5 +1,7 @@
 package perso.tictactoe.game;
 
+import java.util.Stack;
+
 public class Game {
 	
 	private TableCase _checkerboard;
@@ -8,6 +10,8 @@ public class Game {
 	private Player _current;
 	private int _moves = 0;
 	private boolean _console_active = true;
+	private Stack<Moves> _history = new Stack<Moves>() ;
+	
 
 	public Game(Player player1, Player player2) {
 		this._checkerboard = new TableCase((parent)-> new TableCase(parent, (e)-> new Case(e)));
@@ -19,6 +23,7 @@ public class Game {
 				_tableboard[j/3+(i/3)*3][j%3+(i%3)*3] = cases[j];
 			}
 		}
+		
 		_players[0] = player1;
 		_players[1] = player2;
 		_current = player1;
@@ -56,6 +61,7 @@ public class Game {
 		
 		_checkerboard.getChildren().get()[pos_t.getValue()].getChildren().get()[pos_c.getValue()].setPlacement(_current.getPlacement());
 		// TODO : Test play in !enable case
+		
 		switchPlayer();
 		display();
 		return true;
@@ -70,8 +76,9 @@ public class Game {
 	public boolean play(int index_x, int index_y){
 		if (_tableboard[index_x][index_y].isPlacement() || !_tableboard[index_x][index_y].isEnable())
 			return false;
-		// TODO : Test play in !enable case
+	
 		_tableboard[index_x][index_y].setPlacement(_current.getPlacement());
+		// TODO : Test play in !enable case
 		
 		switchPlayer();
 		display();
@@ -95,4 +102,8 @@ public class Game {
 			}
 		}
 	};	
+	
+	public void switchEnableCase(){
+		
+	}
 }
