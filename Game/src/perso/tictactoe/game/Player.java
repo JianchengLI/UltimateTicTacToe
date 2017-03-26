@@ -1,20 +1,28 @@
 package perso.tictactoe.game;
 
-public class Player {
-	private String name;
-	private Placement placement;
+
+public class Player{
+	private String _name;
+	private Placement _placement;
+	private Game _game;
 	
-	public Player(String name, Placement placement) {
+	public Player(String name, Placement placement, Game game) {
 		super();
-		this.name = name;
-		this.placement = placement;
+		_name = name;
+		_placement = placement;
+		_game = game;
+		_game.addPlayer(this);
 	}
 
 	public String getName() {
-		return name;
+		return _name;
 	}
 
 	public Placement getPlacement() {
-		return placement;
+		return _placement;
+	}
+
+	public void update() {
+		// TODO: notify by game
 	}
 }

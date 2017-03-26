@@ -18,17 +18,30 @@ public class Moves {
 	public Moves(int x, int y) {
 		_x = x;
 		_y = y;
-		
-		_px = Position.values()[(x/3)*3+(y/3)];
-		_py = Position.values()[(x%3)*3+y%3];
-		
+		_px = getPostionXByIndex(x, y);
+		_py = getPostionYByIndex(x, y);
 	}
 	
 	public Moves(Position px, Position py) {
-		_x = py.getValue()/3+(px.getValue()/3)*3;
-		_y = py.getValue()%3+(px.getValue()%3)*3;
+		_x = getXByPosition(px, py);
+		_y = getYByPosition(px, py);
 		_px = px;
 		_py = py;
-		
 	}
+	
+	public static final int getXByPosition(Position px, Position py){
+		return py.getValue()/3+(px.getValue()/3)*3; 
+	}
+	
+	public static int getYByPosition(Position px, Position py){
+		return py.getValue()%3+(px.getValue()%3)*3;
+	}
+	
+	public static final Position getPostionXByIndex(int x, int y){
+		return Position.values()[(x/3)*3+(y/3)];
+	};
+	
+	public static final Position getPostionYByIndex(int x, int y){
+		return Position.values()[(x%3)*3+y%3];
+	};
 }

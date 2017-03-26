@@ -54,7 +54,8 @@ public class TableCase extends Case{
 		 || ( _cases[Position.TOP_RIGHT.getValue()].getPlacement() == _cases[Position.RIGHT.getValue()].getPlacement() && _cases[Position.RIGHT.getValue()].getPlacement() == _cases[Position.BOT_RIGHT.getValue()].getPlacement()) && _cases[Position.RIGHT.getValue()].getPlacement() != Placement.EMPTY
 		 || ( _cases[Position.TOP_LEFT.getValue()].getPlacement() == _cases[Position.MID.getValue()].getPlacement() && _cases[Position.MID.getValue()].getPlacement() == _cases[Position.BOT_RIGHT.getValue()].getPlacement()) && _cases[Position.MID.getValue()].getPlacement() != Placement.EMPTY
 		 || ( _cases[Position.TOP_RIGHT.getValue()].getPlacement() == _cases[Position.MID.getValue()].getPlacement() && _cases[Position.MID.getValue()].getPlacement() == _cases[Position.BOT_LEFT.getValue()].getPlacement()) && _cases[Position.MID.getValue()].getPlacement() != Placement.EMPTY
-		);
+		 || super.isPlacement()
+	    );
 	}
 }
 

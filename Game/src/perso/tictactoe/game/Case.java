@@ -66,17 +66,34 @@ public class Case {
 		return _placement == Placement.EMPTY;
 	}
 
+	/**
+	 * Display placements
+	 */
 	public void display(){
-		switch (_placement) {
-		case CROSS:
-			System.out.print("X");
-			break;
-		case CIRCLE:
-			System.out.print("O");
-			break;
-		default:
-			System.out.print("E");
-			break;
+		if (_parent.isPresent() && _parent.get().isEnable()) {
+			switch (_placement) {
+			case CROSS:
+				System.out.print("X");
+				break;
+			case CIRCLE:
+				System.out.print("O");
+				break;
+			default:
+				System.out.print("E");
+				break;
+			}
+		}else{
+			switch (_placement) {
+			case CROSS:
+				System.out.print("x");
+				break;
+			case CIRCLE:
+				System.out.print("o");
+				break;
+			default:
+				System.out.print("e");
+				break;
+			}
 		}
 	}
 }
