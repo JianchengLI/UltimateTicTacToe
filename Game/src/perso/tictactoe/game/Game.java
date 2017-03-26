@@ -126,7 +126,6 @@ public class Game {
 		_current = _players.get(_history.size()%2);
 	}
 	
-	
 	/**
 	 * Game Rules
 	 * Only enable the TableCase by last movement

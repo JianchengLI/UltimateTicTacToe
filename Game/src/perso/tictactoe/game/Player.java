@@ -22,6 +22,14 @@ public class Player{
 		return _placement;
 	}
 
+	public boolean play(Position px, Position py){
+		return _game.play(this, px, py);
+	}
+	
+	public boolean play(int x, int y){
+		return _game.play(this, x, y);
+	}
+	
 	public void update() {
 		// TODO: notify by game
 	}
