@@ -38,4 +38,9 @@
       <subvertex xmi:type="uml:Pseudostate" xmi:id="_1GvWgB1sEee99rZhrW_GBw" name="" kind="choice"/>
     </region>
   </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_JWaC4B1vEee99rZhrW_GBw" name="Player"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_Lf-XcB1vEee99rZhrW_GBw" name="Case"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_NVkAEB1vEee99rZhrW_GBw" name="Table Case">
+    <generalization xmi:id="_RWgF8B1vEee99rZhrW_GBw" general="_Lf-XcB1vEee99rZhrW_GBw"/>
+  </packagedElement>
 </uml:Model>
