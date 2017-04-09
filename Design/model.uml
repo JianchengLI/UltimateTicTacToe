@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_q9wVUB1hEee99rZhrW_GBw" name="NewModel">
+  <packagedElement xmi:type="uml:StateMachine" xmi:id="_Eein8B1iEee99rZhrW_GBw" name="Game Server State">
+    <region xmi:id="_GLjjYB1iEee99rZhrW_GBw" name="Region1">
+      <transition xmi:id="_cEqrEB1qEee99rZhrW_GBw" source="_PLujYB1iEee99rZhrW_GBw" target="_UkdioB1iEee99rZhrW_GBw">
+        <trigger xmi:id="_i8wkQB1qEee99rZhrW_GBw" name="Server Start"/>
+      </transition>
+      <transition xmi:id="_JCH8UB1sEee99rZhrW_GBw" source="_UkdioB1iEee99rZhrW_GBw" target="_HLSWgB1sEee99rZhrW_GBw">
+        <trigger xmi:id="_Nj1M8B1sEee99rZhrW_GBw" name="A player Connected"/>
+      </transition>
+      <transition xmi:id="_T8GWkB1sEee99rZhrW_GBw" source="_HLSWgB1sEee99rZhrW_GBw" target="_HV2W0B1jEee99rZhrW_GBw">
+        <trigger xmi:id="_WlmIYB1sEee99rZhrW_GBw" name="Has two Players"/>
+      </transition>
+      <transition xmi:id="_YjvQEB1sEee99rZhrW_GBw" source="_HLSWgB1sEee99rZhrW_GBw" target="_UkdioB1iEee99rZhrW_GBw">
+        <trigger xmi:id="_f6IO0B1sEee99rZhrW_GBw" name="Has Just one Player"/>
+      </transition>
+      <transition xmi:id="_-7YgYB1sEee99rZhrW_GBw" source="_HV2W0B1jEee99rZhrW_GBw" target="_1GvWgB1sEee99rZhrW_GBw">
+        <trigger xmi:id="_BYKE0B1tEee99rZhrW_GBw" name="One Player Move"/>
+      </transition>
+      <transition xmi:id="_JP3A4B1tEee99rZhrW_GBw" source="_1GvWgB1sEee99rZhrW_GBw" target="_TyiZoB1mEee99rZhrW_GBw">
+        <trigger xmi:id="_N5KHQB1tEee99rZhrW_GBw" name="Some Player Win ?"/>
+      </transition>
+      <transition xmi:id="_PWUo0B1tEee99rZhrW_GBw" source="_1GvWgB1sEee99rZhrW_GBw" target="_fPYQYB1mEee99rZhrW_GBw">
+        <trigger xmi:id="_ZNHHwB1tEee99rZhrW_GBw" name="No Place to move"/>
+      </transition>
+      <transition xmi:id="_asEZEB1tEee99rZhrW_GBw" source="_fPYQYB1mEee99rZhrW_GBw" target="_mvXXYB1jEee99rZhrW_GBw"/>
+      <transition xmi:id="_bIVeUB1tEee99rZhrW_GBw" source="_TyiZoB1mEee99rZhrW_GBw" target="_mvXXYB1jEee99rZhrW_GBw"/>
+      <transition xmi:id="_c2FZkB1tEee99rZhrW_GBw" source="_1GvWgB1sEee99rZhrW_GBw" target="_HV2W0B1jEee99rZhrW_GBw">
+        <trigger xmi:id="_kL2GMB1tEee99rZhrW_GBw" name="Switch Player"/>
+      </transition>
+      <subvertex xmi:type="uml:Pseudostate" xmi:id="_PLujYB1iEee99rZhrW_GBw" name="Initial1"/>
+      <subvertex xmi:type="uml:State" xmi:id="_UkdioB1iEee99rZhrW_GBw" name="Waitting Players"/>
+      <subvertex xmi:type="uml:State" xmi:id="_HV2W0B1jEee99rZhrW_GBw" name="Game Begin"/>
+      <subvertex xmi:type="uml:FinalState" xmi:id="_mvXXYB1jEee99rZhrW_GBw" name="Final1"/>
+      <subvertex xmi:type="uml:State" xmi:id="_TyiZoB1mEee99rZhrW_GBw" name="Win"/>
+      <subvertex xmi:type="uml:State" xmi:id="_fPYQYB1mEee99rZhrW_GBw" name="Draw Game"/>
+      <subvertex xmi:type="uml:Pseudostate" xmi:id="_HLSWgB1sEee99rZhrW_GBw" name="Choice2" kind="choice"/>
+      <subvertex xmi:type="uml:Pseudostate" xmi:id="_1GvWgB1sEee99rZhrW_GBw" name="" kind="choice"/>
+    </region>
+  </packagedElement>
+</uml:Model>
