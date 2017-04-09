@@ -43,4 +43,62 @@
   <packagedElement xmi:type="uml:Class" xmi:id="_NVkAEB1vEee99rZhrW_GBw" name="Table Case">
     <generalization xmi:id="_RWgF8B1vEee99rZhrW_GBw" general="_Lf-XcB1vEee99rZhrW_GBw"/>
   </packagedElement>
+  <packagedElement xmi:type="uml:Interface" xmi:id="_eQpoMB1vEee99rZhrW_GBw" name="ICaseFactoryMethod"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="_qlI4oB1vEee99rZhrW_GBw" name="" memberEnd="_qlI4oR1vEee99rZhrW_GBw _qlKt0R1vEee99rZhrW_GBw" navigableOwnedEnd="_qlKt0R1vEee99rZhrW_GBw">
+    <ownedEnd xmi:id="_qlI4oR1vEee99rZhrW_GBw" name="table Cases" type="_NVkAEB1vEee99rZhrW_GBw" association="_qlI4oB1vEee99rZhrW_GBw">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_qlKGwB1vEee99rZhrW_GBw"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_qlKt0B1vEee99rZhrW_GBw" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_qlKt0R1vEee99rZhrW_GBw" name="iCaseFactoryMethods" type="_eQpoMB1vEee99rZhrW_GBw" aggregation="composite" association="_qlI4oB1vEee99rZhrW_GBw">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_qlLU4B1vEee99rZhrW_GBw"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_qlL78B1vEee99rZhrW_GBw" value="*"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_IMhNMB1wEee99rZhrW_GBw" name="table CasesToCases" memberEnd="_IMh0QB1wEee99rZhrW_GBw _IMh0Qx1wEee99rZhrW_GBw" navigableOwnedEnd="_IMh0Qx1wEee99rZhrW_GBw">
+    <ownedEnd xmi:id="_IMh0QB1wEee99rZhrW_GBw" name="table Cases" type="_NVkAEB1vEee99rZhrW_GBw" association="_IMhNMB1wEee99rZhrW_GBw">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_IMh0QR1wEee99rZhrW_GBw"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_IMh0Qh1wEee99rZhrW_GBw" value="*"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_IMh0Qx1wEee99rZhrW_GBw" name="cases" type="_Lf-XcB1vEee99rZhrW_GBw" aggregation="shared" association="_IMhNMB1wEee99rZhrW_GBw">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_IMh0RB1wEee99rZhrW_GBw"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_IMh0RR1wEee99rZhrW_GBw" value="*"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_itiNwB1wEee99rZhrW_GBw" name="Moves"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_nc3qsB1wEee99rZhrW_GBw" name="Game"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="_0ixJ8B1wEee99rZhrW_GBw" name="gamesToPlayers" memberEnd="_0ixxAB1wEee99rZhrW_GBw _0ixxAx1wEee99rZhrW_GBw" navigableOwnedEnd="_0ixxAx1wEee99rZhrW_GBw">
+    <ownedEnd xmi:id="_0ixxAB1wEee99rZhrW_GBw" name="games" type="_nc3qsB1wEee99rZhrW_GBw" association="_0ixJ8B1wEee99rZhrW_GBw">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_0ixxAR1wEee99rZhrW_GBw"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_0ixxAh1wEee99rZhrW_GBw" value="*"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_0ixxAx1wEee99rZhrW_GBw" name="players" type="_JWaC4B1vEee99rZhrW_GBw" aggregation="shared" association="_0ixJ8B1wEee99rZhrW_GBw">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_0ixxBB1wEee99rZhrW_GBw"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_0iyYEB1wEee99rZhrW_GBw" value="*"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_1ylMAB1wEee99rZhrW_GBw" name="gamesToMovess" memberEnd="_1ylMAR1wEee99rZhrW_GBw _1ymaIB1wEee99rZhrW_GBw" navigableOwnedEnd="_1ymaIB1wEee99rZhrW_GBw">
+    <ownedEnd xmi:id="_1ylMAR1wEee99rZhrW_GBw" name="games" type="_nc3qsB1wEee99rZhrW_GBw" association="_1ylMAB1wEee99rZhrW_GBw">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_1ylzEB1wEee99rZhrW_GBw"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_1ylzER1wEee99rZhrW_GBw" value="*"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_1ymaIB1wEee99rZhrW_GBw" name="movess" type="_itiNwB1wEee99rZhrW_GBw" aggregation="shared" association="_1ylMAB1wEee99rZhrW_GBw">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_1ymaIR1wEee99rZhrW_GBw"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_1ymaIh1wEee99rZhrW_GBw" value="*"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_7t23oB1wEee99rZhrW_GBw" memberEnd="_7t3esB1wEee99rZhrW_GBw _7t4FwR1wEee99rZhrW_GBw" navigableOwnedEnd="_7t4FwR1wEee99rZhrW_GBw">
+    <ownedEnd xmi:id="_7t3esB1wEee99rZhrW_GBw" name="games" type="_nc3qsB1wEee99rZhrW_GBw" association="_7t23oB1wEee99rZhrW_GBw">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_7t3esR1wEee99rZhrW_GBw"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_7t4FwB1wEee99rZhrW_GBw" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_7t4FwR1wEee99rZhrW_GBw" name="table Cases" type="_NVkAEB1vEee99rZhrW_GBw" aggregation="composite" association="_7t23oB1wEee99rZhrW_GBw">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_7t4Fwh1wEee99rZhrW_GBw"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_7t4s0B1wEee99rZhrW_GBw" value="*"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_bebGQB1xEee99rZhrW_GBw" name="Placement"/>
+  <packagedElement xmi:type="uml:Usage" xmi:id="_ioxNEB1xEee99rZhrW_GBw" client="_JWaC4B1vEee99rZhrW_GBw" supplier="_bebGQB1xEee99rZhrW_GBw"/>
+  <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_lwLC4B1xEee99rZhrW_GBw" name="Position"/>
+  <packagedElement xmi:type="uml:Usage" xmi:id="_r9Nz8B1xEee99rZhrW_GBw" client="_NVkAEB1vEee99rZhrW_GBw" supplier="_lwLC4B1xEee99rZhrW_GBw"/>
+  <packagedElement xmi:type="uml:Usage" xmi:id="_thTc4B1xEee99rZhrW_GBw" client="_itiNwB1wEee99rZhrW_GBw" supplier="_lwLC4B1xEee99rZhrW_GBw"/>
 </uml:Model>
