@@ -15,18 +15,13 @@ public class Server {
 			try {
 				BufferedReader in = new BufferedReader(new InputStreamReader(client.getInputStream()));
 				PrintWriter out = new PrintWriter(client.getOutputStream(), true);
-				 while(true){
-				      try{
-				        String line = in.readLine();
-				        if (line != null) {
-				        	 System.out.println("Text recived : " + line);
-						}
-				       
-				      } catch (IOException e) {
-				        System.out.println("Read failed");
-				        System.exit(-1);
-				      }
-				    }
+				String inputLine, outputLine;
+				while ((inputLine = in.readLine()) != null) {
+					System.out.println("Text recived : " + inputLine);
+					out.println("Who are you ?");
+				}
+				System.out.print("Server Bye~");
+				
 			} catch (IOException e) {
 				System.out.println("Read failed");
 				System.exit(-1);
