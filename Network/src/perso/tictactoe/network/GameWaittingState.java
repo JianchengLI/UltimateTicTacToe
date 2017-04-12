@@ -1,14 +1,17 @@
 package perso.tictactoe.network;
 
-public class GameWaittingState implements GameState{
-
+public class GameWaittingState implements GameState {
+	private GameServer _protocol;
+	
+	public GameWaittingState(GameServer protocol) {
+		_protocol = protocol;
+	}
 	@Override
-	public void onePlayerConnected() {
-		// TODO Auto-generated method stub
+	public String processInput(String input) {
+		if (_protocol.getGame().getPlayers().size() == 2)
+			_protocol.setState(_protocol.getBeginState());
+		
+		return "";
 	}
 
-	@Override
-	public void onePlayerMoved() {
-		// TODO Auto-generated method stub
-	}
 }

@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class TestProtocol {
+public class TestGameServer {
 
 	@Test
 	public void test() {

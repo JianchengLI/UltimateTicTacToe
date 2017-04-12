@@ -7,51 +7,60 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class GameServer  implements GameState{
-	private static GameState game;
+import perso.tictactoe.game.Game;
+
+public class GameServer {
+	private static ServerSocket serverSocket;
+
+	private Game _game;
+	private GameState _state;
+	private GameWaittingState _waittingState;
+	private GameBeginState _beginState;
+	
+	public Game getGame(){ return _game;}
+	public void setState(GameState state) {this._state = state;}
+	public GameWaittingState getWaittingState() {return _waittingState;}
+	public GameBeginState getBeginState() {return _beginState;}
+	
+	public GameServer(Game game) {
+		_waittingState = new GameWaittingState(this);
+		_beginState = new GameBeginState(this);
+		_game = game;
+		_state = _waittingState;
+	}
+	
+	public void processInput(String input, Socket clientSocket) throws IOException{
+		PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
+		out.println(_state.processInput(input));
+	}
 	
 	public static void main(String[] args) {
 		try {
-			ServerSocket server = new ServerSocket(4321);
-			
+			serverSocket = new ServerSocket(4321);
+			Game game = new Game();
+			GameServer gameServer = new GameServer(game);
+
 			while (true) {
-				Socket client = server.accept();
-				if (client.isConnected()) {
-					Runnable thread = ()-> {
-						game = new GameWaittingState();
-						
+				Socket clientSocket = serverSocket.accept();
+				if (clientSocket.isConnected()) {
+					Runnable thread = () -> {
 						try {
-							BufferedReader in = new BufferedReader(new InputStreamReader(client.getInputStream()));
-							PrintWriter out = new PrintWriter(client.getOutputStream(), true);
-							String inputLine, outputLine;
+							String inputLine;
+							BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 							while ((inputLine = in.readLine()) != null) {
-								System.out.println("Text recived : " + inputLine);
-								out.println("Who are you ?");
+								gameServer.processInput(inputLine, clientSocket);
 							}
-							System.out.print("Server Bye~");
-							
 						} catch (IOException e) {
 							System.out.println("Read failed");
 							System.exit(-1);
 						}
 					};
-					thread.run();
+					new Thread(thread).start();
 				}
 			}
 		} catch (IOException e) {
 			System.out.println("Could not listen on port 4321");
 			System.exit(-1);
 		}
-
-	}
-
-	@Override
-	public void onePlayerConnected() {
-		game.onePlayerConnected();
-	}
-
-	@Override
-	public void onePlayerMoved() {
-		game.onePlayerMoved();
 	}
 }

@@ -1,14 +1,15 @@
 package perso.tictactoe.network;
 
-public class GameBeginState implements GameState{
-
-	@Override
-	public void onePlayerConnected() {
-		// TODO Auto-generated method stub
+public class GameBeginState implements GameState {
+	private GameServer _protocol;
+	
+	public GameBeginState(GameServer protocol) {
+		_protocol = protocol;
 	}
 
 	@Override
-	public void onePlayerMoved() {
-		// TODO Auto-generated method stub
+	public String processInput(String input) {
+		return "";
 	}
+
 }
