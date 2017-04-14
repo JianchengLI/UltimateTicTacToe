@@ -1,10 +1,10 @@
 package perso.tictactoe.network;
 
 public class GameBeginState implements GameState {
-	private GameServer _protocol;
+	private GameServer _gameServer;
 	
-	public GameBeginState(GameServer protocol) {
-		_protocol = protocol;
+	public GameBeginState(GameServer gameServer) {
+		_gameServer = gameServer;
 	}
 
 	@Override

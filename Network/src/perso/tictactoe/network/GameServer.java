@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Vector;
 
 import perso.tictactoe.game.Game;
 
@@ -14,19 +15,21 @@ public class GameServer {
 
 	private Game _game;
 	private GameState _state;
-	private GameWaittingState _waittingState;
+	private GameWaitingState _waitingState;
 	private GameBeginState _beginState;
+	private Vector<Socket> _clients = new Vector<>();
 	
 	public Game getGame(){ return _game;}
 	public void setState(GameState state) {this._state = state;}
-	public GameWaittingState getWaittingState() {return _waittingState;}
+	public GameWaitingState getWaittingState() {return _waitingState;}
 	public GameBeginState getBeginState() {return _beginState;}
+	public Vector<Socket> getClients(){return _clients;}
 	
 	public GameServer(Game game) {
-		_waittingState = new GameWaittingState(this);
+		_waitingState = new GameWaitingState(this);
 		_beginState = new GameBeginState(this);
 		_game = game;
-		_state = _waittingState;
+		_state = _waitingState;
 	}
 	
 	public void processInput(String input, Socket clientSocket) throws IOException{
@@ -34,29 +37,44 @@ public class GameServer {
 		out.println(_state.processInput(input));
 	}
 	
+	public void boardcast(String message){
+		_clients.forEach(client ->{
+			PrintWriter out;
+			try {
+				out = new PrintWriter(client.getOutputStream(), true);
+				out.println(message);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		});
+	}
+	
 	public static void main(String[] args) {
 		try {
 			serverSocket = new ServerSocket(4321);
+			System.out.println("[Server]: Game Server is started, waiting players to join");
+			
 			Game game = new Game();
-			GameServer gameServer = new GameServer(game);
-
+			GameServer server = new GameServer(game);
+			
 			while (true) {
-				Socket clientSocket = serverSocket.accept();
-				if (clientSocket.isConnected()) {
-					Runnable thread = () -> {
-						try {
-							String inputLine;
-							BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-							while ((inputLine = in.readLine()) != null) {
-								gameServer.processInput(inputLine, clientSocket);
-							}
-						} catch (IOException e) {
-							System.out.println("Read failed");
-							System.exit(-1);
+				Socket cient = serverSocket.accept();
+				server.getClients().add(cient);
+				
+				BufferedReader in = new BufferedReader(new InputStreamReader(cient.getInputStream()));
+				Runnable thread = () -> {
+					try {
+						String inputLine;
+						while ((inputLine = in.readLine()) != null) {
+							server.processInput(inputLine, cient);
 						}
-					};
-					new Thread(thread).start();
-				}
+					} catch (IOException e) {
+						System.out.println("Read failed");
+						System.exit(-1);
+					}
+				};
+				new Thread(thread).start();
+				
 			}
 		} catch (IOException e) {
 			System.out.println("Could not listen on port 4321");
