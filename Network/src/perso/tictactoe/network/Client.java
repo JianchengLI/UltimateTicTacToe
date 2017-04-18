@@ -10,6 +10,7 @@ import java.util.Scanner;
 
 public class Client {
 	private Socket _socket;
+	private Scanner scanner;
 
 	public Client(Socket socket) {
 		_socket = socket;
@@ -34,7 +35,7 @@ public class Client {
 	public void calling(){
 		new Thread(() -> {
 			try {
-				Scanner scanner = new Scanner(System.in);
+				scanner = new Scanner(System.in);
 				String inputLine;
 				
 				PrintWriter out = new PrintWriter(_socket.getOutputStream(), true);

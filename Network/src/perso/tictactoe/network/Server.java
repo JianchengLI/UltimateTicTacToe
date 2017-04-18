@@ -13,6 +13,10 @@ public class Server {
 	private int _port; 
 	private static ServerSocket _serverSocket;
 	private static List<Socket> _clientsSockets;
+	private State _state;
+	
+	public State getState() {return _state;}
+	public void setState(State _state) {this._state = _state;}
 	
 	public Server(int port) throws IOException{
 		_port = port;
@@ -63,14 +67,14 @@ public class Server {
 				BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 				String inputLine = "";
 				while ((inputLine = in.readLine()) != null) {
-					System.out.println("[Client]: " + inputLine);
+					_state.parser(inputLine);
 				}
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}).start();
 	}
-	
+
 	public static void main(String[] args) throws IOException{
 		Server server = new Server(4321);
 		server.start();
