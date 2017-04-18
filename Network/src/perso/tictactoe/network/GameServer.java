@@ -33,8 +33,7 @@ public class GameServer {
 	}
 	
 	public void processInput(String input, Socket clientSocket) throws IOException{
-		PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
-		out.println(_state.processInput(input));
+		boardcast(_state.processInput(input));
 	}
 	
 	public void boardcast(String message){
@@ -56,7 +55,6 @@ public class GameServer {
 			
 			Game game = new Game();
 			GameServer server = new GameServer(game);
-			
 			while (true) {
 				Socket cient = serverSocket.accept();
 				server.getClients().add(cient);
@@ -74,7 +72,6 @@ public class GameServer {
 					}
 				};
 				new Thread(thread).start();
-				
 			}
 		} catch (IOException e) {
 			System.out.println("Could not listen on port 4321");

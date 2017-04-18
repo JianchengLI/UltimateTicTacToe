@@ -22,7 +22,7 @@ public class GameClient {
 				out.println(inputLine);
 				String fromServer;
 				while ((fromServer = in.readLine()) != null) {
-					System.out.println("[Server]:"+fromServer);
+					System.out.println("[Server]:" + fromServer);
 					break;
 				}
 			}

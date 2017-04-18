@@ -32,9 +32,8 @@ public class GameWaitingState implements GameState {
 		}
 		
 		if (_server.getGame().getPlayers().size() == 2){
-			System.out.println("[Server]: Game is begin");
+			System.out.println("[Server]: Two Players joined, the game will begin");
 			_server.setState(_server.getBeginState());
-			_server.boardcast("Two players joined, game will begin");
 		}
 		return response;
 	}
