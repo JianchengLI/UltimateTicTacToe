@@ -1,6 +1,8 @@
 package perso.tictactoe.network;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -22,18 +24,17 @@ public class Server {
 		System.out.println("[Server]: Server Start at port: " + _port);
 		System.out.println("[Server]: Watting Player to Join.");
 		while (true) {
-			Socket client = _serverSocket.accept();
-			if (client != null) {
+			Socket socket = _serverSocket.accept();
+			if (socket != null) {
 				if (_clientsSockets.size() >= 2){
-					send(client, "Sorry, there are two player already in this Server.");
+					send(socket, "Sorry, there are two player already in this Server.");
 					continue;
 				}
-				_clientsSockets.add(client);
-				System.out.println("[Server]: A Client join the Server with " + client);
-
-				new Thread(() -> {
-					broadcast("Welcome");
-				}).start();
+				_clientsSockets.add(socket);
+				System.out.println("[Server]: A Client join the Server with " + socket);
+				
+				send(socket, "Welcom to Game Ultimate TicTacToc.");
+				listening(socket);
 			}
 		}
 	}
@@ -50,6 +51,24 @@ public class Server {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}	
+	}
+	
+	/**
+	 * Start a Thread to Listening a Socket 
+	 * @param socket
+	 */
+	public void listening(Socket socket){
+		new Thread(() -> {
+			try {
+				BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+				String inputLine = "";
+				while ((inputLine = in.readLine()) != null) {
+					System.out.println("[Client]: " + inputLine);
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}).start();
 	}
 	
 	public static void main(String[] args) throws IOException{
