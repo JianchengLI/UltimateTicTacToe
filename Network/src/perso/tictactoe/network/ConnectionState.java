@@ -1,5 +1,7 @@
 package perso.tictactoe.network;
 
+import java.net.Socket;
+
 /**
  * Waiting two connection( sockets ) to join the server
  * @author Jiancheng
@@ -12,13 +14,8 @@ public class ConnectionState extends State {
 	}
 
 	@Override
-	public void parser(String message) {
-		// TODO Auto-generated method stub
-	}
-
-	@Override
-	public void talking(String message) {
-		// TODO Auto-generated method stub
+	public void parser(Socket socket, String message) {
+		System.out.println(socket + ": " + message);
 		
 	}
 

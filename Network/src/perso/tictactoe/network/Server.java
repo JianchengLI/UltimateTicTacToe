@@ -13,17 +13,32 @@ public class Server {
 	private int _port; 
 	private static ServerSocket _serverSocket;
 	private static List<Socket> _clientsSockets;
+
 	private State _state;
+	private State _connectiong_state;
+	private State _before_begin_state;
+	private State _begin_state;
 	
 	public State getState() {return _state;}
+	public State getConnectiongState() {return _connectiong_state;}
+	public State getBeforeBeginState() {return _before_begin_state;}
+	public State getBeginState() {return _begin_state;}
+	
 	public void setState(State _state) {this._state = _state;}
+	public static List<Socket> getClientsSockets() {return _clientsSockets;}
 	
 	public Server(int port) throws IOException{
 		_port = port;
 		_serverSocket = new ServerSocket(_port);
 		_clientsSockets = new LinkedList<>();
+		
+		_connectiong_state = new ConnectionState(this);
+		_before_begin_state = new BeforeBeginState(this);
+		_begin_state = new BeginState(this);
+		_state = _connectiong_state;
 	}
 	
+
 	public void start() throws IOException{
 		System.out.println("[Server]: Server Start at port: " + _port);
 		System.out.println("[Server]: Watting Player to Join.");
@@ -34,10 +49,20 @@ public class Server {
 					send(socket, "Sorry, there are two player already in this Server.");
 					continue;
 				}
-				_clientsSockets.add(socket);
-				System.out.println("[Server]: A Client join the Server with " + socket);
 				
-				send(socket, "Welcom to Game Ultimate TicTacToc.");
+				send(socket, "[Server]: Welcome to the Game - Ultimate TicTacToc.");
+				_clientsSockets.add(socket);
+				if (_clientsSockets.size() == 2) {
+					_clientsSockets.forEach(client -> {
+						if (socket != client) {
+							send(client, "[Server]: "+ socket + " has join the Server.");
+						}
+					});
+					broadcast("[Server]: 2 clients connected to the Server, Tell me what's player name do you want to display in the Game ?");
+					broadcast("[Server]: Please entry your name in this format \"{name:myname};\"");
+					setState(_before_begin_state);
+					System.out.println("[Server]: A Client join the Server with " + socket);
+				}
 				listening(socket);
 			}
 		}
@@ -67,7 +92,7 @@ public class Server {
 				BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 				String inputLine = "";
 				while ((inputLine = in.readLine()) != null) {
-					_state.parser(inputLine);
+					_state.parser(socket, inputLine);
 				}
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -76,7 +101,7 @@ public class Server {
 	}
 
 	public static void main(String[] args) throws IOException{
-		Server server = new Server(4321);
+		Server server = new Server(4322);
 		server.start();
 	}
 }

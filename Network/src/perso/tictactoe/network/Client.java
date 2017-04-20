@@ -24,7 +24,7 @@ public class Client {
 				BufferedReader in = new BufferedReader(new InputStreamReader(_socket.getInputStream()));
 				String inputLine = "";
 				while ((inputLine = in.readLine()) != null) {
-					System.out.println("[Server]:" + inputLine);
+					System.out.println(inputLine);
 				}
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -40,6 +40,7 @@ public class Client {
 				
 				PrintWriter out = new PrintWriter(_socket.getOutputStream(), true);
 				while ((inputLine = scanner.nextLine()) != null) {
+					System.out.println("[Me]: " + inputLine);
 					out.println(inputLine);
 				}
 			} catch (IOException e) {
@@ -50,6 +51,6 @@ public class Client {
 	}
 	
 	public static void main(String[] args) throws UnknownHostException, IOException{
-		new Client(new Socket("localhost", 4321));
+		new Client(new Socket("localhost", 4322));
 	}
 }
