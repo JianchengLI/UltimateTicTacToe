@@ -52,6 +52,8 @@ public class Server {
 				
 				send(socket, "[Server]: Welcome to the Game - Ultimate TicTacToc.");
 				_clientsSockets.add(socket);
+				
+				// Connection nubmers cheking, change state machine
 				if (_clientsSockets.size() == 2) {
 					_clientsSockets.forEach(client -> {
 						if (socket != client) {
@@ -60,9 +62,12 @@ public class Server {
 					});
 					broadcast("[Server]: 2 clients connected to the Server, Tell me what's player name do you want to display in this Game ?");
 					broadcast("[Server]: Please entry your name in the format of \"{name:myname};\"");
-					setState(_before_begin_state);
+					
 					System.out.println("[Server]: A Client join the Server with " + socket);
+					setState(_before_begin_state);
 				}
+				
+				// Listening thread start here, parser inputstream by different state machine
 				listening(socket);
 			}
 		}
