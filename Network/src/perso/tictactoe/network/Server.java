@@ -58,8 +58,8 @@ public class Server {
 							send(client, "[Server]: "+ socket + " has join the Server.");
 						}
 					});
-					broadcast("[Server]: 2 clients connected to the Server, Tell me what's player name do you want to display in the Game ?");
-					broadcast("[Server]: Please entry your name in this format \"{name:myname};\"");
+					broadcast("[Server]: 2 clients connected to the Server, Tell me what's player name do you want to display in this Game ?");
+					broadcast("[Server]: Please entry your name in the format of \"{name:myname};\"");
 					setState(_before_begin_state);
 					System.out.println("[Server]: A Client join the Server with " + socket);
 				}
