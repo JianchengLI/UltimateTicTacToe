@@ -6,13 +6,20 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+
+import perso.tictactoe.game.Game;
+import perso.tictactoe.game.Player;
 
 public class Server {
 	private int _port; 
 	private static ServerSocket _serverSocket;
 	private static List<Socket> _clientsSockets;
+	private Map<Socket, Player> _players;
+	private Game _game;
 
 	private State _state;
 	private State _connectiong_state;
@@ -23,6 +30,8 @@ public class Server {
 	public State getConnectiongState() {return _connectiong_state;}
 	public State getBeforeBeginState() {return _before_begin_state;}
 	public State getBeginState() {return _begin_state;}
+	public Map<Socket, Player> getPlayers(){return _players;};
+	public Game getGame(){return _game;};
 	
 	public void setState(State _state) {this._state = _state;}
 	public static List<Socket> getClientsSockets() {return _clientsSockets;}
@@ -31,6 +40,8 @@ public class Server {
 		_port = port;
 		_serverSocket = new ServerSocket(_port);
 		_clientsSockets = new LinkedList<>();
+		_players = new HashMap<>();
+		_game = new Game();
 		
 		_connectiong_state = new ConnectionState(this);
 		_before_begin_state = new BeforeBeginState(this);
@@ -61,7 +72,7 @@ public class Server {
 						}
 					});
 					broadcast("[Server]: 2 clients connected to the Server, Tell me what's player name do you want to display in this Game ?");
-					broadcast("[Server]: Please entry your name in the format of \"{name:myname};\"");
+					broadcast("[Server]: Please entry your name in the format of \"{name:your_name};\"");
 					
 					System.out.println("[Server]: A Client join the Server with " + socket);
 					setState(_before_begin_state);

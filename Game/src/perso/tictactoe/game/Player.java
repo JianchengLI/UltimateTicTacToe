@@ -33,4 +33,9 @@ public class Player{
 	public void update() {
 		// TODO: notify by game
 	}
+
+	@Override
+	public String toString() {
+		return _name + ":" + _placement;
+	}
 }
