@@ -16,6 +16,6 @@ public class ConnectionState extends State {
 	@Override
 	public void parser(Socket socket, String message) {
 		System.out.println( socket + ": " + message);
-		_server.send(socket, "[Server]: Hi, we are waiting for another player to join the game ...");
+		_server.send(socket, "[Server]: Hi, please waiting for another player to join the game ...");
 	}
 }
