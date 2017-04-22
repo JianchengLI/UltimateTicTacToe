@@ -28,7 +28,11 @@ public class BeforeBeginState extends State {
 			return;
 		}
 		
-		// ok, message was valided, create a player for this client socket
+		/*
+		 * ok, message was valided, create a player for this client socket
+		 * player1: CIRCLE
+		 * player2: CROSS 
+		 */
 		Player player =  _server.getPlayers().size() == 0 ?
 				new Player(message, Placement.CIRCLE, _server.getGame()) :
 				new Player(message, Placement.CROSS, _server.getGame());
@@ -40,7 +44,13 @@ public class BeforeBeginState extends State {
 			_server.broadcast("[Server]: 2 Players were registered. Game is begin, BON COURAGE !");
 			_server.setState(_server.getBeginState());
 			
-			// TODO: who play first ? 
+			Socket first = _server.getClientsSockets().get(0);
+			_server.send(first, "[Server]: Hello "+ _server.getGame().getCurrentPlayer() + " you will play first.");
+			_server.send(first, "[Server]: Please entry your move in the format of \"{move:x,y};\"");
+			
+			Socket second = _server.getClientsSockets().get(1);
+			_server.send(second, "[Server]: Hello, " + _server.getPlayers().get(second) + " you will play second.");
+			_server.send(second, "[Server]: Please wait first player to move and then you can entry your move in the format of \"{move:x,y};\"");
 		}
 	}
 	

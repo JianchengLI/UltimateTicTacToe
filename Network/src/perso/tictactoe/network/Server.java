@@ -34,7 +34,7 @@ public class Server {
 	public Game getGame(){return _game;};
 	
 	public void setState(State _state) {this._state = _state;}
-	public static List<Socket> getClientsSockets() {return _clientsSockets;}
+	public List<Socket> getClientsSockets() {return _clientsSockets;}
 	
 	public Server(int port) throws IOException{
 		_port = port;
