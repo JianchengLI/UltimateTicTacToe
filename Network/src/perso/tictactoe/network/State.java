@@ -10,4 +10,5 @@ public abstract class State {
 	}
 	
 	public abstract void parser(Socket socket, final String message);
+	public abstract boolean stateProtocolValid(String message);
 }

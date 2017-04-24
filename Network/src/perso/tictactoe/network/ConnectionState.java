@@ -18,4 +18,9 @@ public class ConnectionState extends State {
 		System.out.println( socket + ": " + message);
 		_server.send(socket, "[Server]: Hi, please waiting for another player to join the game ...");
 	}
+
+	@Override
+	public boolean stateProtocolValid(String message) {
+		return true;
+	}
 }

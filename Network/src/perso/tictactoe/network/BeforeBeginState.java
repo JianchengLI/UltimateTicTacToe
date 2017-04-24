@@ -58,7 +58,8 @@ public class BeforeBeginState extends State {
 		}
 	}
 	
-	private boolean stateProtocolValid(String message){
+	@Override
+	public boolean stateProtocolValid(String message){
 		return true;
 	}
 
