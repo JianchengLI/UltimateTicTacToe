@@ -19,13 +19,13 @@ public class BeforeBeginState extends State {
 	@Override
 	public void parser(Socket socket, String message) {
 		
-		// Already register ?
-			// yes, sorry, just wait an other player to register
-			// no, message valid ?
-				// yes, register this player, first player CIRCLE, second player CROSS
-					// two player already ?
-						// yes, boardcast game is begin, notiy first to play, second to wait
-				// no, error message ( bad message format ) and re-entry
+	// Already register ?
+		// yes, sorry, just wait an other player to register
+		// no, message valid ?
+			// yes, register this player, first player CIRCLE, second player CROSS
+				// two player already ?
+					// yes, broadcast game is begin, notify first to play, second to wait
+			// no, error message ( bad message format ) and re-entry
 		
 		if(_server.getPlayers().containsKey(socket)){
 			_server.send(socket, "[Server]: Sorry, you have regisered already with a player-" + _server.getPlayers().get(socket));

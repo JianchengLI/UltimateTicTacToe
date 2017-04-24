@@ -64,7 +64,7 @@ public class Server {
 				send(socket, "[Server]: Welcome to the Game - Ultimate TicTacToc.");
 				_clientsSockets.add(socket);
 				
-				// Connection nubmers cheking, change state machine
+				// Connection number checking, change state machine
 				if (_clientsSockets.size() == 2) {
 					_clientsSockets.forEach(client -> {
 						if (socket != client) {
@@ -78,7 +78,7 @@ public class Server {
 					setState(_before_begin_state);
 				}
 				
-				// Listening thread start here, parser inputstream by different state machine
+				// Listening thread start here, parser input stream by different state machine
 				listening(socket);
 			}
 		}
