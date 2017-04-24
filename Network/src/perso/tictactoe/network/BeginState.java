@@ -2,8 +2,10 @@ package perso.tictactoe.network;
 
 import java.net.Socket;
 
+import perso.tictactoe.game.Player;
+
 /**
- * Begin, Player can play the game
+ * Begin, play the game
  * @author Jiancheng
  *
  */
@@ -27,7 +29,8 @@ public class BeginState extends State {
 			//no, error message ( bad entry ), re-entry movement.
 		// no, please wait the other player to move ...
 		
-		if (_server.getGame().getCurrentPlayer() != _server.getPlayers().get(socket)) {
+		Player player = _server.getGame().getCurrentPlayer();
+		if(player != _server.getPlayers().get(socket)) {
 			_server.send(socket, "[Server]: Sorry, it's not your turn, please waiting.");
 			return;
 		}
@@ -36,8 +39,20 @@ public class BeginState extends State {
 			_server.send(socket, "[Server]: Sorry, please entry your movement in the format of \"{move:x,y};\"");
 			return;
 		}
+		
+		int index_x = 0;
+		int index_y = 0;
+		if (!_server.getGame().play(player, index_x, index_y)) {
+			_server.send(socket, "[Server]: Sorry, you can't play in this place(" + index_x + "," + index_y + ")");
+			// TODO: Game return Code
+			return;
+		}
+		
+		_server.broadcast("[Server]: " + player + " place to (" + index_x + "," + index_y + ")");
+		_server.send(socket, "[Server]: It's your opponent's turn");
+		_server.send(opponent(socket), "[Server]: It's your your turn "+ _server.getGame().getCurrentPlayer() +", please entry your movement in the format of \"{move:x,y};");
 	}
-	
+
 	@Override
 	public boolean stateProtocolValid(String message){
 		return true;

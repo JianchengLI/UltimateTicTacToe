@@ -11,4 +11,10 @@ public abstract class State {
 	
 	public abstract void parser(Socket socket, final String message);
 	public abstract boolean stateProtocolValid(String message);
+	
+	public Socket opponent(Socket player){
+		return _server.getClientsSockets().stream()
+				.filter(socket-> socket != player)
+				.findFirst().get();
+	}
 }

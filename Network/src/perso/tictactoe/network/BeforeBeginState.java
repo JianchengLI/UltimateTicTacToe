@@ -48,13 +48,14 @@ public class BeforeBeginState extends State {
 			_server.broadcast("[Server]: 2 Players were registered. Game is begin, BON COURAGE !");
 			_server.setState(_server.getBeginState());
 			
-			Socket first = _server.getClientsSockets().get(0);
+			Socket first = _server.getGame().getCurrentPlayer() == _server.getPlayers().get(socket) ?
+					socket : opponent(socket);
 			_server.send(first, "[Server]: Hello "+ _server.getGame().getCurrentPlayer() + " you will play first.");
 			_server.send(first, "[Server]: Please entry your move in the format of \"{move:x,y};\"");
 			
-			Socket second = _server.getClientsSockets().get(1);
+			Socket second =opponent(first);
 			_server.send(second, "[Server]: Hello, " + _server.getPlayers().get(second) + " you will play second.");
-			_server.send(second, "[Server]: Please wait first player to move and then you can entry your move in the format of \"{move:x,y};\"");
+			_server.send(second, "[Server]: Please wait " + _server.getGame().getCurrentPlayer() + " to move and then you can entry your move in the format of \"{move:x,y};\"");
 		}
 	}
 	

@@ -26,13 +26,6 @@ public class Server {
 	private State _before_begin_state;
 	private State _begin_state;
 	
-	public State getState() {return _state;}
-	public State getConnectiongState() {return _connectiong_state;}
-	public State getBeforeBeginState() {return _before_begin_state;}
-	public State getBeginState() {return _begin_state;}
-	public Map<Socket, Player> getPlayers(){return _players;};
-	public Game getGame(){return _game;};
-	
 	public void setState(State _state) {this._state = _state;}
 	public List<Socket> getClientsSockets() {return _clientsSockets;}
 	
@@ -64,7 +57,7 @@ public class Server {
 				send(socket, "[Server]: Welcome to the Game - Ultimate TicTacToc.");
 				_clientsSockets.add(socket);
 				
-				// Connection number checking, change state machine
+				// connection number checking, change state machine
 				if (_clientsSockets.size() == 2) {
 					_clientsSockets.forEach(client -> {
 						if (socket != client) {
@@ -116,6 +109,13 @@ public class Server {
 		}).start();
 	}
 
+	public State getState() {return _state;}
+	public State getConnectiongState() {return _connectiong_state;}
+	public State getBeforeBeginState() {return _before_begin_state;}
+	public State getBeginState() {return _begin_state;}
+	public Map<Socket, Player> getPlayers(){return _players;};
+	public Game getGame(){return _game;};
+	
 	public static void main(String[] args) throws IOException{
 		Server server = new Server(4322);
 		server.start();
