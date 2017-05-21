@@ -1,6 +1,7 @@
 package perso.tictactoe.network;
 
 import java.net.Socket;
+import java.util.Optional;
 
 public abstract class State {
 	protected Server _server;
@@ -10,7 +11,7 @@ public abstract class State {
 	}
 	
 	public abstract void parser(Socket socket, final String message);
-	public abstract boolean stateProtocolValid(String message);
+	public abstract Optional<String> parserProtocolBeforeBegin(String message);
 	
 	public Socket opponent(Socket player){
 		return _server.getClientsSockets().stream()

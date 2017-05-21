@@ -21,7 +21,7 @@ public class Server {
 	private Map<Socket, Player> _players;
 	private Game _game;
 
-	private State _state;
+	private State _state; // current state
 	private State _connectiong_state;
 	private State _before_begin_state;
 	private State _begin_state;

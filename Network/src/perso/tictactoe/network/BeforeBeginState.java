@@ -1,6 +1,7 @@
 package perso.tictactoe.network;
 
 import java.net.Socket;
+import java.util.Optional;
 
 import perso.tictactoe.game.Placement;
 import perso.tictactoe.game.Player;
@@ -32,14 +33,15 @@ public class BeforeBeginState extends State {
 			return;
 		}
 		
-		if(!stateProtocolValid(message)){
+		Optional<String> userName = parserProtocolBeforeBegin(message);
+		if(userName.isPresent()){
 			_server.send(socket, "[Server]: Sorry, please entry your name in the format of \"{name:your_name};\"");
 			return;
 		}
 		
 		Player player =  _server.getPlayers().size() == 0 ?
-				new Player(message, Placement.CIRCLE, _server.getGame()) :
-				new Player(message, Placement.CROSS, _server.getGame());
+				new Player(userName.get(), Placement.CIRCLE, _server.getGame()) :
+				new Player(userName.get(), Placement.CROSS, _server.getGame());
 		
 		_server.getPlayers().put(socket, player);
 		_server.send(socket, "[Server]: You have regisered with a player( " + player + " )" );
@@ -60,8 +62,8 @@ public class BeforeBeginState extends State {
 	}
 	
 	@Override
-	public boolean stateProtocolValid(String message){
-		return true;
+	public Optional<String> parserProtocolBeforeBegin(String message){
+	   return Util.parserProtocolBeforeBegin(message);
 	}
 
 }

@@ -1,6 +1,7 @@
 package perso.tictactoe.network;
 
 import java.net.Socket;
+import java.util.Optional;
 
 /**
  * Waiting two connection( sockets ) to join the server
@@ -20,7 +21,7 @@ public class ConnectionState extends State {
 	}
 
 	@Override
-	public boolean stateProtocolValid(String message) {
-		return true;
+	public Optional<String> parserProtocolBeforeBegin(String message) {
+		return Optional.empty();
 	}
 }

@@ -1,6 +1,7 @@
 package perso.tictactoe.network;
 
 import java.net.Socket;
+import java.util.Optional;
 
 import perso.tictactoe.game.Player;
 
@@ -34,12 +35,13 @@ public class BeginState extends State {
 			_server.send(socket, "[Server]: Sorry, it's not your turn, please waiting.");
 			return;
 		}
-		
-		if(!stateProtocolValid(message)) {
+		Optional<String> movement = parserProtocolBeforeBegin(message);
+		if(!movement.isPresent()) {
 			_server.send(socket, "[Server]: Sorry, please entry your movement in the format of \"{move:x,y};\"");
 			return;
 		}
 		
+		//TODO: Begin State machine movement check and Game Play State code define 
 		int index_x = 0;
 		int index_y = 0;
 		if (!_server.getGame().play(player, index_x, index_y)) {
@@ -54,7 +56,7 @@ public class BeginState extends State {
 	}
 
 	@Override
-	public boolean stateProtocolValid(String message){
-		return true;
+	public Optional<String> parserProtocolBeforeBegin(String message){
+		return Optional.empty();
 	}
 }
