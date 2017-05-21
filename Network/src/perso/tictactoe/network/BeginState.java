@@ -3,6 +3,7 @@ package perso.tictactoe.network;
 import java.net.Socket;
 import java.util.Optional;
 
+import perso.tictactoe.game.Moves;
 import perso.tictactoe.game.Player;
 
 /**
@@ -35,15 +36,14 @@ public class BeginState extends State {
 			_server.send(socket, "[Server]: Sorry, it's not your turn, please waiting.");
 			return;
 		}
-		Optional<String> movement = parserProtocolBeforeBegin(message);
-		if(!movement.isPresent()) {
+		Optional<Moves> move = parserProtocol(message);
+		if(!move.isPresent()) {
 			_server.send(socket, "[Server]: Sorry, please entry your movement in the format of \"{move:x,y};\"");
 			return;
 		}
 		
-		//TODO: Begin State machine movement check and Game Play State code define 
-		int index_x = 0;
-		int index_y = 0;
+		int index_x = move.get().getX();
+		int index_y = move.get().getY();
 		if (!_server.getGame().play(player, index_x, index_y)) {
 			_server.send(socket, "[Server]: Sorry, you can't play in this place(" + index_x + "," + index_y + ")");
 			// TODO: Game return Code
@@ -55,8 +55,9 @@ public class BeginState extends State {
 		_server.send(opponent(socket), "[Server]: It's your your turn "+ _server.getGame().getCurrentPlayer() +", please entry your movement in the format of \"{move:x,y};");
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public Optional<String> parserProtocolBeforeBegin(String message){
-		return Optional.empty();
+	public Optional<Moves> parserProtocol(String message){
+		return Util.parserProtocolBeginState(message);
 	}
 }

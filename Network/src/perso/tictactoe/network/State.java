@@ -11,7 +11,7 @@ public abstract class State {
 	}
 	
 	public abstract void parser(Socket socket, final String message);
-	public abstract Optional<String> parserProtocolBeforeBegin(String message);
+	public abstract <T> Optional<T> parserProtocol(String message);
 	
 	public Socket opponent(Socket player){
 		return _server.getClientsSockets().stream()

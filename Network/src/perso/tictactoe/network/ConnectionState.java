@@ -20,8 +20,9 @@ public class ConnectionState extends State {
 		_server.send(socket, "[Server]: Hi, please waiting for another player to join the game ...");
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public Optional<String> parserProtocolBeforeBegin(String message) {
+	public Optional<String> parserProtocol(String message) {
 		return Optional.empty();
 	}
 }

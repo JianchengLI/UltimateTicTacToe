@@ -33,8 +33,8 @@ public class BeforeBeginState extends State {
 			return;
 		}
 		
-		Optional<String> userName = parserProtocolBeforeBegin(message);
-		if(userName.isPresent()){
+		Optional<String> userName = parserProtocol(message);
+		if(!userName.isPresent()){
 			_server.send(socket, "[Server]: Sorry, please entry your name in the format of \"{name:your_name};\"");
 			return;
 		}
@@ -61,8 +61,9 @@ public class BeforeBeginState extends State {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
-	public Optional<String> parserProtocolBeforeBegin(String message){
+	public Optional<String> parserProtocol(String message){
 	   return Util.parserProtocolBeforeBegin(message);
 	}
 
