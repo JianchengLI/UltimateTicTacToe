@@ -12,7 +12,7 @@ public class Game {
 	private boolean _console_active = false;
 	private Stack<Moves> _history = new Stack<>() ;
 	
-
+	
 	public Game() {
 		this._checkerboard = new TableCase((parent)-> new TableCase(parent, (e)-> new Case(e)));
 		
@@ -55,14 +55,18 @@ public class Game {
 	 * @param pos_c : Case Position
 	 * @return boolean
 	 */
-	public boolean play(Player player, Position pos_t, Position pos_c){
+	public PlayStates play(Player player, Position pos_t, Position pos_c){
 		boolean isPlacement = _checkerboard.getChildren().get()[pos_t.getValue()].getChildren().get()[pos_c.getValue()].isPlacement();
 		boolean isTableEnable = _checkerboard.getChildren().get()[pos_t.getValue()].isEnable();
 		boolean isEnable = isTableEnable && _checkerboard.getChildren().get()[pos_t.getValue()].getChildren().get()[pos_c.getValue()].isEnable();
 		boolean isCurrentPlayer = player.equals(_current);
 		
-		if (isPlacement || !isEnable || !isCurrentPlayer)
-			return false;
+		if(isPlacement)
+			return PlayStates.OCCUPIED;
+		if(!isEnable)
+			return PlayStates.DISABLED;
+		if(!isCurrentPlayer)
+			return PlayStates.OPPONENT;
 		
 		_checkerboard.getChildren().get()[pos_t.getValue()].getChildren().get()[pos_c.getValue()].setPlacement(_current.getPlacement());
 		_history.push(new Moves(pos_t, pos_c));
@@ -71,7 +75,8 @@ public class Game {
 		_switchEnableCase();
 		display();
 		notifyAllPlayers();
-		return true;
+		
+		return PlayStates.SUCCESS;
 	}
 	
 	/**
@@ -80,14 +85,18 @@ public class Game {
 	 * @param index_y : 0 < y < 9
 	 * @return boolean
 	 */
-	public boolean play(Player player, int index_x, int index_y){
+	public PlayStates play(Player player, int index_x, int index_y){
 		boolean isPlacement =  _tableboard[index_x][index_y].isPlacement();
 		boolean isTableEnable = _checkerboard.getChildren().get()[Moves.getPostionXByIndex(index_x, index_y).getValue()].isEnable();
 		boolean isEnbale = isTableEnable && _tableboard[index_x][index_y].isEnable();
 		boolean isCurrentPlayer = player.equals(_current);
 		
-		if ( isPlacement || !isEnbale || !isCurrentPlayer)
-			return false;
+		if(isPlacement)
+			return PlayStates.OCCUPIED;
+		if(!isEnbale)
+			return PlayStates.DISABLED;
+		if(!isCurrentPlayer)
+			return PlayStates.OPPONENT;
 		
 		_tableboard[index_x][index_y].setPlacement(_current.getPlacement());
 		_history.push(new Moves(index_x, index_y));
@@ -96,7 +105,8 @@ public class Game {
 		_switchEnableCase();
 		display();
 		notifyAllPlayers();
-		return true;
+		
+		return PlayStates.SUCCESS;
 	}
 	
 	/**

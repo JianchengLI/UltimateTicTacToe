@@ -4,6 +4,7 @@ import java.net.Socket;
 import java.util.Optional;
 
 import perso.tictactoe.game.Moves;
+import perso.tictactoe.game.PlayStates;
 import perso.tictactoe.game.Player;
 
 /**
@@ -44,9 +45,9 @@ public class BeginState extends State {
 		
 		int index_x = move.get().getX();
 		int index_y = move.get().getY();
-		if (!_server.getGame().play(player, index_x, index_y)) {
-			_server.send(socket, "[Server]: Sorry, you can't play in this place(" + index_x + "," + index_y + ")");
-			// TODO: Game return Code
+		PlayStates state = _server.getGame().play(player, index_x, index_y);
+		if (state != PlayStates.SUCCESS) {
+			_server.send(socket, "[Server]: Sorry, you can't play in this place(" + index_x + "," + index_y + "), State:" + state);
 			return;
 		}
 		

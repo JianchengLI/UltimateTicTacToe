@@ -34,11 +34,11 @@ public class TestGame {
 		Player player1 = new Player("Player1", Placement.CIRCLE, game);
 		Player player2 = new Player("Player2", Placement.CROSS, game);
 		
-		assert game.play(player1,Position.LEFT,Position.LEFT);
+		assertEquals(PlayStates.SUCCESS, game.play(player1,Position.LEFT,Position.LEFT));
 		assertEquals(game.getCurrentPlayer().getName(), player2.getName());
 		
-		assertFalse(game.play(player1, Position.LEFT,Position.TOP_LEFT)); // Same player
-		assertFalse(game.play(player2, Position.LEFT,Position.LEFT)); // Same place
+		assertEquals(PlayStates.OPPONENT, game.play(player1, Position.LEFT,Position.TOP_LEFT)); // Same player
+		assertEquals(PlayStates.OCCUPIED, game.play(player2, Position.LEFT,Position.LEFT)); // Same place
 		assertEquals(game.getCurrentPlayer().getName(), player2.getName());
 	}
 	
@@ -49,11 +49,11 @@ public class TestGame {
 		Player player1 = new Player("Player1", Placement.CIRCLE, game);
 		Player player2 = new Player("Player2", Placement.CROSS, game);
 		
-		assert game.play(player1,0,0);
+		assertEquals(PlayStates.SUCCESS, game.play(player1,0,0));
 		assertEquals(game.getCurrentPlayer().getName(),player2.getName());
 		
-		assertFalse(game.play(player1,0,1)); // Same player
-		assertFalse(game.play(player2,0,0)); // Same place
+		assertEquals(PlayStates.OPPONENT, game.play(player1,0,1)); // Same player
+		assertEquals(PlayStates.OCCUPIED, game.play(player2,0,0)); // Same place
 		assertEquals(game.getCurrentPlayer().getName(),player2.getName());
 	}
 	
@@ -65,13 +65,13 @@ public class TestGame {
 		Player player2 = new Player("Player2", Placement.CROSS, game);
 		
 		assertEquals(game.getCurrentPlayer(),player1);
-		assertFalse(game.play(player2, Position.LEFT, Position.LEFT));
+		assertEquals(PlayStates.OPPONENT, game.play(player2, Position.LEFT, Position.LEFT));
 		
-		assertTrue(game.play(player1, Position.LEFT, Position.LEFT));
+		assertEquals(PlayStates.SUCCESS,game.play(player1, Position.LEFT, Position.LEFT));
 		assertEquals(Placement.CIRCLE, game.getTableBoard()[4][0].getPlacement());
 		
-		assertFalse(game.play(player1, Position.LEFT, Position.RIGHT));
-		assertTrue(game.play(player2, Position.LEFT, Position.RIGHT));
+		assertEquals(PlayStates.OPPONENT, game.play(player1, Position.LEFT, Position.RIGHT));
+		assertEquals(PlayStates.SUCCESS, game.play(player2, Position.LEFT, Position.RIGHT));
 		assertEquals(Placement.CROSS, game.getTableBoard()[4][2].getPlacement());
 	}
 	
@@ -83,13 +83,13 @@ public class TestGame {
 		Player player2 = new Player("Player2", Placement.CROSS, game);
 		
 		assertEquals(game.getCurrentPlayer(), player1);
-		assertFalse(game.play(player2, 4, 0));
+		assertEquals(PlayStates.OPPONENT,game.play(player2, 4, 0));
 		
-		assertTrue(game.play(player1, 4, 0));
+		assertEquals(PlayStates.SUCCESS,game.play(player1, 4, 0));
 		assertEquals(Placement.CIRCLE, game.getTableBoard()[4][0].getPlacement());
 		
-		assertFalse(game.play(player1, 4, 2));
-		assertTrue(game.play(player2, 4, 2));
+		assertEquals(PlayStates.OPPONENT,game.play(player1, 4, 2));
+		assertEquals(PlayStates.SUCCESS,game.play(player2, 4, 2));
 		assertEquals(Placement.CROSS, game.getTableBoard()[4][2].getPlacement());
 	}
 	
@@ -106,7 +106,7 @@ public class TestGame {
 		game.display();
 		Player player1 = new Player("Player1", Placement.CIRCLE, game);
 		Player player2 = new Player("Player2", Placement.CROSS, game);
-		assertTrue(game.play(player1, 4, 0));
+		assertEquals(PlayStates.SUCCESS,game.play(player1, 4, 0));
 		Case[] tableCase = game.getCheckerBoard().getChildren().get();
 		for (int i = 0; i < tableCase.length; i++) {
 			if (i== 3)
@@ -114,8 +114,8 @@ public class TestGame {
 			assertFalse(tableCase[i].isEnable());
 		}
 		
-		assertFalse(game.play(player2, Position.TOP, Position.MID));
-		assertTrue(game.play(player2, Position.LEFT, Position.MID));
+		assertEquals(PlayStates.DISABLED,game.play(player2, Position.TOP, Position.MID));
+		assertEquals(PlayStates.SUCCESS, game.play(player2, Position.LEFT, Position.MID));
 	}
 	
 	@Test
@@ -131,7 +131,7 @@ public class TestGame {
 		game.display();
 		Player player1 = new Player("Player1", Placement.CIRCLE, game);
 		Player player2 = new Player("Player2", Placement.CROSS, game);
-		assertTrue(game.play(player1, 4, 0));
+		assertEquals(PlayStates.SUCCESS, game.play(player1, 4, 0));
 		Case[] tableCase = game.getCheckerBoard().getChildren().get();
 		for (int i = 0; i < tableCase.length; i++) {
 			if (i== 3)
@@ -139,8 +139,8 @@ public class TestGame {
 			assertFalse(tableCase[i].isEnable());
 		}
 		
-		assertFalse(game.play(player2, Position.TOP, Position.MID));
+		assertEquals(PlayStates.DISABLED,game.play(player2, Position.TOP, Position.MID));
 		game.getCheckerBoard().getChildren().get()[4].setPlacement(Placement.CIRCLE);
-		assertTrue(game.play(player2,4,1));
+		assertEquals(PlayStates.SUCCESS,game.play(player2,4,1));
 	}
 }
